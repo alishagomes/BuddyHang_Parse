@@ -79,11 +79,11 @@ public class ProfileFragment extends Fragment {
         welcome = view.findViewById(R.id.welcome);
 
         if (ParseUser.getCurrentUser() == null) {
-            Intent i = new Intent(getActivity(), LoginActivity.class);
+            Intent i = new Intent(getActivity(), RegisterActivity.class);
             startActivity(i);
             ((Activity) getActivity()).overridePendingTransition(0, 0);
         } else {
-            
+
             ParseUser user = ParseUser.getCurrentUser();
             welcome.setText("Hello " + user.get("username"));
 
@@ -96,25 +96,25 @@ public class ProfileFragment extends Fragment {
 
             // updating info
             if (user.get("name") == null) {
-                name.setText("Name");
+                name.setText("");
             } else {
                 name.setText(user.get("name").toString());
             }
 
             if (user.get("bio") == null) {
-                bio.setText("Bio");
+                bio.setText("");
             } else {
                 bio.setText(user.get("bio").toString());
             }
 
             if (user.get("username") == null) {
-                username.setText("Username");
+                username.setText("");
             } else {
                 username.setText(user.get("username").toString());
             }
 
             if (user.get("hobbies") == null) {
-                hobbies.setText("Hobbies");
+                hobbies.setText("");
             } else {
                 hobbies.setText(user.get("hobbies").toString());
             }

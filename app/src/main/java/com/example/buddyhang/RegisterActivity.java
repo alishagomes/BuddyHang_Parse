@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 
@@ -16,6 +18,7 @@ import android.os.Handler;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private static final String TAG = "RegisterActivity";
     private EditText userUsername;
     private EditText userPassword;
     private Button buttonSignUp;
@@ -64,6 +67,16 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("email",email.getText().toString());
         user.put("phone", phone.getText().toString());
         user.saveInBackground();
+
+        user.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.i(TAG, "Saved");
+                } else {
+                    Log.i(TAG, "Did not save");
+                }
+            }
+        });
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
