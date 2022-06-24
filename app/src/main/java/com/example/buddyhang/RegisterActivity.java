@@ -1,23 +1,24 @@
 package com.example.buddyhang;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Button;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+
+import android.os.Handler;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    public EditText userUsername;
-    public EditText userPassword;
-    public Button buttonSignUp;
+    private EditText userUsername;
+    private EditText userPassword;
+    private Button buttonSignUp;
     private EditText name;
     private EditText email;
     private EditText phone;
@@ -52,12 +53,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
-    private void createAccount(String username, String password) {
+    public void createAccount(String username, String password) {
         ParseUser user = new ParseUser();
         // Set core properties
-        user.setUsername(username);
-        user.setPassword(password);
+
+        user.put("username", username);
+        user.put("password", password);
 
         user.put("name",name.getText().toString());
         user.put("email",email.getText().toString());
@@ -67,7 +68,9 @@ public class RegisterActivity extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
+
                 } else {
+
                 }
             }
         });
@@ -80,6 +83,5 @@ public class RegisterActivity extends AppCompatActivity {
         }, 2000);
 
     }
-
 
 }

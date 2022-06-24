@@ -7,17 +7,36 @@
     android:orientation="vertical"
     tools:context=".fragments.ProfileFragment">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name" />
+        android:text="Welcome" />
+
+    <ImageView
+        android:id="@+id/profile_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+    <TextView
+        android:id="@+id/your_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your friends" />
+
+    <Button
+        android:id="@+id/add_new_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add friends" />
+
+    <TextView
+        android:id="@+id/username_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your username" />
 
     <EditText
         android:id="@+id/username"
@@ -25,37 +44,48 @@
         android:layout_height="wrap_content"
         android:text="Username" />
 
+    <TextView
+        android:id="@+id/bio_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your bio" />
+
     <EditText
         android:id="@+id/bio"
         android:text="Bio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
         />
+
+    <TextView
+        android:id="@+id/name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your name" />
+
 
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
         android:text="Name" />
+
+    <TextView
+        android:id="@+id/hobbies_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Hobbies" />
 
     <EditText
         android:id="@+id/hobbies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
         android:text="Hobbies" />
 
     <Button
         android:id="@+id/buttonUpdateInfo"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
         android:text="Update Info" />
 
     <Button
@@ -63,6 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout" />
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
