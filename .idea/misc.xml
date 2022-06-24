@@ -3,16 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.6822916666666666" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.18333333333333332" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5251195271809894" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.14893617021276595" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5433980305989581" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.5963147102518285" />
+        <entry key="app/src/main/res/layout/activity_setup_profile.xml" value="0.27402954101562493" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.26268115942028986" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.26268115942028986" />
         <entry key="app/src/main/res/layout/bottom_navigation.xml" value="0.26038500506585616" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.26038500506585616" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25354609929078015" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.26038500506585616" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4606428786010124" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.5688158075860206" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.26038500506585616" />
         <entry key="app/src/main/res/layout/launch_screen.xml" value="0.26038500506585616" />
         <entry key="app/src/main/res/layout/login_activity.xml" value="0.1911766801425116" />

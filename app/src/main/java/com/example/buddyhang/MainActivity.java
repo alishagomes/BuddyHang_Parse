@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.buddyhang.fragments.CalendarFragment;
 import com.example.buddyhang.fragments.HomeFragment;
-import com.example.buddyhang.fragments.NotificationsFragment;
 import com.example.buddyhang.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // hide action bar
+        // hide action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -33,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.action_profile:
                         fragment = new ProfileFragment();
-                        break;
-                    case R.id.action_notifications:
-                        fragment = new NotificationsFragment();
                         break;
                     case R.id.action_calendar:
                         fragment = new CalendarFragment();
@@ -48,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        bottomNavigationView.setSelectedItemId(R.id.action_profile);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.buddyhang;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -30,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
         // implement user persistence
         if (ParseUser.getCurrentUser() != null) {
             goMainActivity();
+        }
+
+        // hide action bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
         }
 
         userUsername = findViewById(R.id.username);
@@ -70,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
     private void goMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-        finish();
     }
 
 

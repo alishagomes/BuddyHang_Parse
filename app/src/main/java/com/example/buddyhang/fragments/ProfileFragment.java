@@ -1,5 +1,6 @@
 package com.example.buddyhang.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,14 +12,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buddyhang.LoginActivity;
 import com.example.buddyhang.R;
+import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+@ParseClassName("Profile")
 public class ProfileFragment extends Fragment {
 
     Button logoutButton;
+    TextView welcome;
+    EditText username;
+    EditText bio;
+    EditText hobbies;
+    EditText name;
+    Button buttonUpdateInfo;
 
     public ProfileFragment() {
 
@@ -27,6 +41,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
@@ -34,18 +49,81 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ParseUser user = ParseUser.getCurrentUser();
+        username = view.findViewById(R.id.username);
         logoutButton = view.findViewById(R.id.logoutButton);
+        welcome = view.findViewById(R.id.welcome);
+        name = view.findViewById(R.id.name);
+        hobbies = view.findViewById(R.id.hobbies);
+        bio = view.findViewById(R.id.bio);
+        buttonUpdateInfo = view.findViewById(R.id.buttonUpdateInfo);
+
+        welcome.setText("Hello " + user.get("name"));
 
 
+        // updating info
+        if(user.get("name") == null) {
+            name.setText("");
+        }   else {
+            name.setText(user.get("name").toString());
+        }
+
+        if(user.get("bio") == null) {
+            bio.setText("");
+        }   else {
+            bio.setText(user.get("bio").toString());
+        }
+
+        if(user.get("username") == null) {
+            username.setText("");
+        }   else {
+            username.setText(user.get("username").toString());
+        }
+
+        if(user.get("hobbies") == null) {
+            hobbies.setText("");
+        }   else {
+            hobbies.setText(user.get("hobbies").toString());
+        }
+
+        buttonUpdateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                user.put("name", name.getText().toString());
+                user.put("bio", bio.getText().toString());
+                user.put("hobbies", hobbies.getText().toString());
+                user.put("username", username.getText().toString());
+
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Updating New Info");
+                progressDialog.show();
+
+                user.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if(e == null)
+                        {
+                            Toast.makeText(getContext(), "Info Updates", Toast.LENGTH_SHORT).show();
+
+                        } else {
+
+                        }
+                        progressDialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
+        // logout button
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 ParseUser.logOut();
-                ParseUser currentUser = ParseUser.getCurrentUser();
 
             }
         });
     }
-
 }
