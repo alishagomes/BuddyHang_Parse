@@ -48,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(TAG, "onClick signup button");
                 String username = userUsername.getText().toString();
                 String password = userPassword.getText().toString();
                 createAccount(username, password);
@@ -56,9 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public void createAccount(String username, String password) {
+    private void createAccount(String username, String password) {
         ParseUser user = new ParseUser();
-        // Set core properties
 
         user.put("username", username);
         user.put("password", password);
@@ -66,6 +66,17 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("name",name.getText().toString());
         user.put("email",email.getText().toString());
         user.put("phone", phone.getText().toString());
+
+        user.signUpInBackground(new SignUpCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.i(TAG, "Signed in");
+                } else {
+                    Log.i(TAG, "Not signed in");
+                }
+            }
+        });
+
         user.saveInBackground();
 
         user.saveInBackground(new SaveCallback() {
@@ -78,15 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
 
-                } else {
 
-                }
-            }
-        });
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
