@@ -1,6 +1,7 @@
 package com.example.buddyhang.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.example.buddyhang.LoginActivity;
 import com.example.buddyhang.MainActivity;
 import com.example.buddyhang.R;
+import com.example.buddyhang.RegisterActivity;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseClassName;
@@ -76,71 +78,76 @@ public class ProfileFragment extends Fragment {
         username = view.findViewById(R.id.username);
         welcome = view.findViewById(R.id.welcome);
 
+        if (ParseUser.getCurrentUser() == null) {
+            Intent i = new Intent(getActivity(), LoginActivity.class);
+            startActivity(i);
+            ((Activity) getActivity()).overridePendingTransition(0, 0);
+        } else {
+            
+            ParseUser user = ParseUser.getCurrentUser();
+            welcome.setText("Hello " + user.get("username"));
 
-        ParseUser user = ParseUser.getCurrentUser();
-        welcome.setText("Hello " + user.get("username"));
 
-        name = view.findViewById(R.id.name);
-        hobbies = view.findViewById(R.id.hobbies);
-        bio = view.findViewById(R.id.bio);
-        buttonUpdateInfo = view.findViewById(R.id.buttonUpdateInfo);
+            name = view.findViewById(R.id.name);
+            hobbies = view.findViewById(R.id.hobbies);
+            bio = view.findViewById(R.id.bio);
+            buttonUpdateInfo = view.findViewById(R.id.buttonUpdateInfo);
 
 
-        // updating info
-        if(user.get("name") == null) {
-            name.setText("Name");
-        }   else {
-            name.setText(user.get("name").toString());
-        }
-
-        if(user.get("bio") == null) {
-            bio.setText("Bio");
-        }   else {
-            bio.setText(user.get("bio").toString());
-        }
-
-        if(user.get("username") == null) {
-            username.setText("Username");
-        }   else {
-            username.setText(user.get("username").toString());
-        }
-
-        if(user.get("hobbies") == null) {
-            hobbies.setText("Hobbies");
-        }   else {
-            hobbies.setText(user.get("hobbies").toString());
-        }
-
-        buttonUpdateInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                user.put("name", name.getText().toString());
-                user.put("bio", bio.getText().toString());
-                user.put("hobbies", hobbies.getText().toString());
-                user.put("username", username.getText().toString());
-
-                final ProgressDialog progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage("Updating New Info");
-                progressDialog.show();
-
-                user.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if(e == null)
-                        {
-                            Toast.makeText(getContext(), "Info Updates", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
-
+            // updating info
+            if (user.get("name") == null) {
+                name.setText("Name");
+            } else {
+                name.setText(user.get("name").toString());
             }
-        });
 
+            if (user.get("bio") == null) {
+                bio.setText("Bio");
+            } else {
+                bio.setText(user.get("bio").toString());
+            }
+
+            if (user.get("username") == null) {
+                username.setText("Username");
+            } else {
+                username.setText(user.get("username").toString());
+            }
+
+            if (user.get("hobbies") == null) {
+                hobbies.setText("Hobbies");
+            } else {
+                hobbies.setText(user.get("hobbies").toString());
+            }
+
+            buttonUpdateInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    user.put("name", name.getText().toString());
+                    user.put("bio", bio.getText().toString());
+                    user.put("hobbies", hobbies.getText().toString());
+                    user.put("username", username.getText().toString());
+
+                    final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                    progressDialog.setMessage("Updating New Info");
+                    progressDialog.show();
+
+                    user.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Toast.makeText(getContext(), "Info Updates", Toast.LENGTH_SHORT).show();
+
+                            } else {
+
+                            }
+                            progressDialog.dismiss();
+                        }
+                    });
+
+                }
+            });
+        }
 
         // logout button
         logoutButton.setOnClickListener(new View.OnClickListener() {
